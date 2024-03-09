@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Menu Item 1",
+    "description": "Description for Menu Item 1",
+    "image_link": "main.jpg",
+    "usage_type": "true"
+  },
+  {
+    "id": 2,
+    "name": "Menu Item 2",
+    "description": "Description for Menu Item 2",
+    "image_link": "menu1.jpg",
+    "usage_type": "true"
+  },
+  {
+    "id": 3,
+    "name": "Menu Item 3",
+    "description": "Description for Menu Item 3",
+    "image_link": "menu2.jpg",
+    "usage_type": "true"
+  },
+  {
+    "id": 4,
+    "name": "Slider Item 1",
+    "description": "Description for Slider Item 1",
+    "image_link": "slider1.jpg",
+    "usage_type": "false"
+  },
+  {
+    "id": 5,
+    "name": "Slider Item 2",
+    "description": "Description for Slider Item 2",
+    "image_link": "slider2.jpg",
+    "usage_type": "false"
+  },
+  {
+    "id": 6,
+    "name": "Slider Item 3",
+    "description": "Description for Slider Item 3",
+    "image_link": "slider3.jpg",
+    "usage_type": "false"
+  }
+]

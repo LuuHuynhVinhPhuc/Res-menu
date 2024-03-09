@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-50dp"
+        android:text="Thiết lập hệ thống"
+        android:textColor="@color/black"
+        android:textSize="50dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt1"
+        android:text="Dành cho quản trị viên"
+        android:textSize="30dp"
+        android:textColor="@color/black"/>
+
+    <!--For API-->
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="-10dp"
+        android:layout_marginLeft="-400dp">
+
+        <ImageView
+            android:id="@+id/image1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="0"
+            android:src="@drawable/baseline_api_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thiết lập API"
+            android:textSize="37dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="2dp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <!--for user to paste and choose option-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:focusableInTouchMode="true"
+        >
+
+        <EditText
+            android:id="@+id/btnAPI"
+            android:layout_width="900dp"
+            android:layout_height="60dp"
+            android:background="@drawable/round_coner"
+            android:hint="Nhập link API vào đây"
+            android:gravity="center"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/black"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/chooseStore"
+            android:layout_width="900dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_below="@id/btnAPI"
+            android:layout_marginTop="40dp"
+
+            app:hintTextColor="@color/black"
+            android:textSize="30sp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:focusable="false"
+            android:inputType="none">
+
+            <AutoCompleteTextView
+                android:id="@+id/auto"
+                android:focusable="true"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:focusableInTouchMode="false"
+                android:clickable="true"
+                android:background="@drawable/round_coner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Lựa chọn chi nhánh của bạn"
+                app:hintTextColor="@color/black"
+                android:textSize="30sp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!--End of API-->
+    </RelativeLayout>
+
+    <!--button for choose-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/mainTxt"
+        android:layout_marginTop="40dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:text="Lưu"
+            android:textAllCaps="false"
+            android:textSize="30dp"
+            android:textStyle="normal"
+            android:layout_marginEnd="180dp"
+            android:backgroundTint="@color/Green"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="400dp"
+            android:textAllCaps="false"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/Silver"
+            android:padding="20dp"
+            android:text="Bỏ qua"
+            android:textColor="@color/Red"
+            android:textSize="30sp"
+
+            android:textStyle="normal" />
+    </LinearLayout>
+    <!--end button for choose-->
+</LinearLayout>

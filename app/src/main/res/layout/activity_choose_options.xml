@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hinh1"
+    android:gravity="center">
+    <!--end of background-->
+
+
+    <RelativeLayout
+        android:layout_width="850dp"
+        android:layout_height="500dp"
+        android:padding="8dp"
+        android:background="@color/white"
+        android:gravity="center">
+
+        <!--Quit button-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonCancel"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="-36dp"
+            android:text="X"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@android:color/holo_red_dark" />
+
+        <!--Main content-->
+        <TextView
+            android:id="@+id/mainTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:padding="2dp"
+            android:text="VUI LÒNG CHỌN CÀI ĐẶT / ĐỒNG BỘ HÌNH ẢNH &amp; VIDEO"
+            android:textSize="50dp"
+            android:textStyle="bold"
+            android:textColor="@color/Black"
+            android:gravity="center"/>
+
+        <!--2 buttons for acept or skip this step-->
+        <LinearLayout
+            android:layout_width="700dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/mainTxt"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="70dp"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonsetting"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="180dp"
+                android:background="@drawable/round_coner"
+                android:backgroundTint="@color/greenLeaf"
+                android:padding="20dp"
+                android:text="Cài đặt"
+                android:textAllCaps="false"
+                android:textColor="@color/White"
+                android:textSize="30dp"
+                android:textStyle="normal" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonOptimize"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_coner"
+                android:backgroundTint="@color/Silver"
+                android:padding="20dp"
+                android:text="Đồng bộ"
+                android:textAllCaps="false"
+                android:textColor="@color/Black"
+                android:textSize="30dp"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

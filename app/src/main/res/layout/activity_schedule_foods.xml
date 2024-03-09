@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".schedule_foods"
+    android:layout_gravity="center"
+    >
+
+    <!--list of images and videos-->
+    <RelativeLayout
+        android:layout_width="2040dp"
+        android:layout_height="948dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="250dp"
+        android:background="@drawable/round_coner"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/mainpage"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="-250sp"
+            android:gravity="center"
+            android:text="Kho hình ảnh &amp; video"
+            android:textColor="@color/black"
+            android:textSize="60sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/eventName"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:text="Chương trình 1"
+            android:textColor="@color/Maroon"
+            android:textSize="60sp"
+            android:layout_marginTop="-10sp"/>
+        <!--for content-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvImage_and_Video"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_below="@id/eventName"
+            android:orientation="horizontal"
+            android:padding="16dp" />
+
+        <!--for date for content-->
+        <TextView
+            android:id="@+id/eventDate"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/rvImage_and_Video"
+            android:gravity="center"
+            android:text="Từ ngày : 27-02-2024"
+            android:textColor="@color/Maroon"
+            android:textSize="60sp" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="1000dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="1080dp"
+        android:layout_marginStart="-1500sp"
+        android:gravity="center"
+        >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonDownload"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="180dp"
+            android:background="@drawable/round_coner"
+            android:backgroundTint="@color/Orange"
+            android:padding="20dp"
+            android:textAllCaps="false"
+            android:text="Download"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="normal" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSave"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="180dp"
+            android:background="@drawable/round_coner"
+            android:backgroundTint="@color/greenLeaf"
+            android:padding="20dp"
+            android:textAllCaps="false"
+            android:text="Lưu"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="normal" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSkip"
+            android:layout_width="200dp"
+            android:textAllCaps="false"
+            android:layout_height="match_parent"
+            android:background="@drawable/round_coner"
+            android:backgroundTint="@color/Silver"
+            android:padding="20dp"
+            android:text="Bỏ qua"
+            android:textColor="@color/Red"
+            android:textSize="30sp"
+            android:textStyle="normal" />
+    </LinearLayout>
+</LinearLayout>

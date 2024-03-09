@@ -1,0 +1,115 @@
+package com.example.myapp
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import android.view.Window
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatButton
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapp.loading_progress.loadingDialog
+import com.example.myapp.recycleView.images_Adapter
+import com.example.myapp.recycleView.images_Item
+import java.util.ArrayList
+
+class schedule_foods : AppCompatActivity() {
+    private var recyclerview : RecyclerView? = null
+    private var recyclerViewimageAdapter : images_Adapter? = null
+    private var imageList = mutableListOf<images_Item>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        supportActionBar?.hide()
+        setContentView(R.layout.activity_schedule_foods)
+
+        // edit for cancel : go to choosing page
+        val btnCancel = findViewById<Button>(R.id.buttonSkip)
+        btnCancel.setOnClickListener{
+            val i = Intent(this, sliderView::class.java)
+            startActivity(i)
+        }
+        // save and go to slider
+        val btnSave = findViewById<Button>(R.id.buttonSave)
+        btnSave.setOnClickListener(){
+            val i = Intent(this, sliderView::class.java)
+            startActivity(i)
+        }
+
+        // for download button
+        val downloadBtn = findViewById<AppCompatButton>(R.id.buttonDownload)
+        downloadBtn.setOnClickListener(){
+            val context = this
+            showAlert(context, "Đồng ý download dữ liệu", "Bạn có muốn download dữ liệu từ API đã cài đặt?"){
+                val loading = loadingDialog(context)
+                loading.startLoading()
+                Handler(Looper.getMainLooper()).postDelayed(object : Runnable{
+                    override fun run() {
+                        loading.isDismiss()
+                        val i = Intent(context, sliderView::class.java)
+                        startActivity(i)
+                        finish()
+                    }
+                },5000)
+            }
+        }
+        // for recyclerView
+
+        imageList = ArrayList()
+        recyclerview = findViewById<View>(R.id.rvImage_and_Video) as RecyclerView
+        recyclerViewimageAdapter = images_Adapter(imageList)
+
+        val layoutManager : RecyclerView.LayoutManager = GridLayoutManager(this, 3)
+        recyclerview!!.layoutManager = layoutManager
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(recyclerview)
+
+        recyclerview!!.adapter = recyclerViewimageAdapter
+        prepareImageListofdata()
+    }
+
+    private fun prepareImageListofdata() {
+        var image = images_Item(R.drawable.ct1)
+        imageList.add(image)
+        image = images_Item(R.drawable.ct1b)
+        imageList.add(image)
+        image = images_Item(R.drawable.ct1c)
+        imageList.add(image)
+        image = images_Item(R.drawable.ct2)
+        imageList.add(image)
+        image = images_Item(R.drawable.ct2b)
+        imageList.add(image)
+        image = images_Item(R.drawable.ct2c)
+        imageList.add(image)
+        image = images_Item(R.drawable.ct3)
+        imageList.add(image)
+        image = images_Item(R.drawable.ct3b)
+        imageList.add(image)
+        image = images_Item(R.drawable.ct3c)
+        imageList.add(image)
+
+        recyclerViewimageAdapter!!.notifyDataSetChanged()
+    }
+
+    // show an alert when incorrect password
+    fun showAlert(context: Context, title: String, message: String, onOkClicked: () -> Unit) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(title)
+        builder.setMessage(message)
+        builder.setPositiveButton("OK") { dialog, _ ->
+            onOkClicked()
+            // Dismiss the dialog when OK button is clicked
+            dialog.dismiss()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+}
