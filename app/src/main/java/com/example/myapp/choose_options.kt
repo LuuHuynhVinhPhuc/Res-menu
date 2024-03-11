@@ -9,14 +9,16 @@ import android.view.Window
 import android.widget.Button
 
 class choose_options : AppCompatActivity() {
+    override fun onDestroy() {
+        val handler = Handler(Looper.getMainLooper())
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
         setContentView(R.layout.activity_choose_options)
-
-        val handler = Handler(Looper.getMainLooper())
-        handler.removeCallbacksAndMessages(null)
         // sign in page
         // find cancel button
         val cancelBtn = findViewById<Button>(R.id.buttonCancel)

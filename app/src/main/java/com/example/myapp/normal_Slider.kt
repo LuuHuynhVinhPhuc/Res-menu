@@ -34,7 +34,6 @@ class normal_Slider : AppCompatActivity() {
     ).apply {
         setMargins(8,0,8,0)
     }
-    @SuppressLint("ClickableViewAccessibility", "DiscouragedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -48,45 +47,6 @@ class normal_Slider : AppCompatActivity() {
             val i = Intent(this, sign_in::class.java)
             startActivity(i)
         }
-        // turn back to slider auto after 1 mins
-        // auto change page after 20s
-        val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed({
-            val i = Intent(this, sliderView::class.java)
-            startActivity(i)
-            finish()
-        }, DELAY_TIME_MS)
-
-        // listen for touch srceen
-        findViewById<View>(android.R.id.content).setOnTouchListener { _, _ ->
-            // Hủy định thời
-            handler.removeCallbacksAndMessages(null)
-            false // Trả về false để tiếp tục lắng nghe sự kiện chạm
-        }
-
-//        val inputStream: InputStream = resources.openRawResource(R.raw.digitalmkt)
-//        val jsonString = inputStream.bufferedReader().use { it.readText() }
-//        val menuItems = Gson().fromJson<List<jsonData>>(jsonString, object : TypeToken<List<jsonData>>(){}.type)
-//
-//        var counter = 0
-////        // menuItems là danh sách các đối tượng MenuItem bạn đã parse từ JSON
-////        // Đảm bảo rằng menuItems là danh sách thích hợp được parse từ JSON trước đó
-//        val imageMoveList = mutableListOf<ImageItem>()
-//        val imageList = arrayListOf<ImageItem>()
-//        // create a multi list to
-//        for (item in menuItems) {
-//            val drawableId = resources.getIdentifier(item.image_link, "drawable", packageName)
-//            // Tạo một đối tượng ImageItem mới với các thông tin từ JSON
-//            val imageItem = ImageItem(
-//                item.id,
-//                "android.resource://$packageName/$drawableId" // Sử dụng đường dẫn hình ảnh từ JSON
-//            )
-//            counter++
-//            if (counter == 3) {
-//                break
-//            }
-//            imageMoveList.add(imageItem)
-//        }
         val imageList = arrayListOf(
             ImageItem(
                 UUID.randomUUID().toString(),
@@ -101,8 +61,6 @@ class normal_Slider : AppCompatActivity() {
                 "android.resource://" + packageName + "/" + R.drawable.menu2
             )
         )
-
-
         val imageAdapter = viewPager_Adapter()
         viewpager2.adapter = imageAdapter
         imageAdapter.submitList(imageList)

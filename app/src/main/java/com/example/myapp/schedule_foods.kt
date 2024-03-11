@@ -13,23 +13,37 @@ import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.loading_progress.loadingDialog
 import com.example.myapp.recycleView.images_Adapter
 import com.example.myapp.recycleView.images_Item
+import com.example.myapp.recycleView.program_Item
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.Json.Default.decodeFromString
+import kotlinx.serialization.json.JsonDecoder
 import java.util.ArrayList
 
 class schedule_foods : AppCompatActivity() {
-    private var recyclerview : RecyclerView? = null
-    private var recyclerViewimageAdapter : images_Adapter? = null
-    private var imageList = mutableListOf<images_Item>()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: images_Adapter
+    private var programs: List<program_Item> = listOf()
 
+    override fun onDestroy() {
+        val handler = Handler(Looper.getMainLooper())
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
         setContentView(R.layout.activity_schedule_foods)
+
+        recyclerView = findViewById(R.id.rvImage_and_Video)
+        adapter = images_Adapter(this)
 
         // edit for cancel : go to choosing page
         val btnCancel = findViewById<Button>(R.id.buttonSkip)
@@ -63,41 +77,50 @@ class schedule_foods : AppCompatActivity() {
         }
         // for recyclerView
 
-        imageList = ArrayList()
-        recyclerview = findViewById<View>(R.id.rvImage_and_Video) as RecyclerView
-        recyclerViewimageAdapter = images_Adapter(imageList)
+        // read json files
+        val jsonString = assets.open("digitalmkt.json").bufferedReader().readText()
+        val programs: List<program_Item> = Json.decodeFromString<List<program_Item>>(jsonString)
 
-        val layoutManager : RecyclerView.LayoutManager = GridLayoutManager(this, 3)
-        recyclerview!!.layoutManager = layoutManager
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(recyclerview)
+        recyclerView.adapter = adapter
+        adapter.setData(programs)
 
-        recyclerview!!.adapter = recyclerViewimageAdapter
-        prepareImageListofdata()
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager = layoutManager
+//        imageList = ArrayList()
+//        recyclerview = findViewById<View>(R.id.rvImage_and_Video) as RecyclerView
+//        recyclerViewimageAdapter = images_Adapter(imageList)
+//
+//        val layoutManager : RecyclerView.LayoutManager = GridLayoutManager(this, 3)
+//        recyclerview!!.layoutManager = layoutManager
+//        val snapHelper = LinearSnapHelper()
+//        snapHelper.attachToRecyclerView(recyclerview)
+//
+//        recyclerview!!.adapter = recyclerViewimageAdapter
+//        prepareImageListofdata()
     }
 
-    private fun prepareImageListofdata() {
-        var image = images_Item(R.drawable.ct1)
-        imageList.add(image)
-        image = images_Item(R.drawable.ct1b)
-        imageList.add(image)
-        image = images_Item(R.drawable.ct1c)
-        imageList.add(image)
-        image = images_Item(R.drawable.ct2)
-        imageList.add(image)
-        image = images_Item(R.drawable.ct2b)
-        imageList.add(image)
-        image = images_Item(R.drawable.ct2c)
-        imageList.add(image)
-        image = images_Item(R.drawable.ct3)
-        imageList.add(image)
-        image = images_Item(R.drawable.ct3b)
-        imageList.add(image)
-        image = images_Item(R.drawable.ct3c)
-        imageList.add(image)
-
-        recyclerViewimageAdapter!!.notifyDataSetChanged()
-    }
+//    private fun prepareImageListofdata() {
+//        var image = images_Item(R.drawable.ct1)
+//        imageList.add(image)
+//        image = images_Item(R.drawable.ct1b)
+//        imageList.add(image)
+//        image = images_Item(R.drawable.ct1c)
+//        imageList.add(image)
+//        image = images_Item(R.drawable.ct2)
+//        imageList.add(image)
+//        image = images_Item(R.drawable.ct2b)
+//        imageList.add(image)
+//        image = images_Item(R.drawable.ct2c)
+//        imageList.add(image)
+//        image = images_Item(R.drawable.ct3)
+//        imageList.add(image)
+//        image = images_Item(R.drawable.ct3b)
+//        imageList.add(image)
+//        image = images_Item(R.drawable.ct3c)
+//        imageList.add(image)
+//
+//        recyclerViewimageAdapter!!.notifyDataSetChanged()
+//    }
 
     // show an alert when incorrect password
     fun showAlert(context: Context, title: String, message: String, onOkClicked: () -> Unit) {
@@ -112,4 +135,5 @@ class schedule_foods : AppCompatActivity() {
         val dialog = builder.create()
         dialog.show()
     }
+
 }

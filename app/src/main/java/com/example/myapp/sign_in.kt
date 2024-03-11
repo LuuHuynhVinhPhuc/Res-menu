@@ -27,18 +27,26 @@ import kotlin.concurrent.timer
 
 class sign_in : AppCompatActivity() {
     private val DELAY_TIME_MS: Long = 90000 // 1mins 30 seconds
-    private lateinit var runnable : Runnable
+    lateinit var runnable: Runnable
+    val handler = Handler(Looper.getMainLooper())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
         setContentView(R.layout.activity_sign_in)
 
-        // default password
-        val passName = "phucluu"
+
+
+        runnable = Runnable {
+            val i = Intent(this, normal_Slider::class.java)
+            startActivity(i)
+            finish()
+        }
 
         // auto change page after 1 mins 30s
-        val handler = Handler(Looper.getMainLooper())
+        handler.postDelayed(runnable, DELAY_TIME_MS)
+        // default password
+        val passName = "phucluu"
 
         // set counting for sign in 3 times error
         var countingsign_in = 3
@@ -46,15 +54,6 @@ class sign_in : AppCompatActivity() {
         val btnAcept = findViewById<Button>(R.id.buttonAcp)
         val editTxt: EditText = findViewById(R.id.editPassword)
 
-        // flag
-        var isUserTyping = false
-        // user starting to input data
-        editTxt.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                isUserTyping = true
-                handler.removeCallbacksAndMessages(null)
-            }
-        }
 //        // Khi người dùng nhập xong
 //        editTxt.setOnKeyListener { _, keyCode, _ ->
 //            if (keyCode == KeyEvent.KEYCODE_ENTER) {
@@ -70,17 +69,16 @@ class sign_in : AppCompatActivity() {
         // set event
         btnAcept.setOnClickListener(){
             // Find EditText (redundant in this case)
-
             val passwordData: String = editTxt.text.toString().trim()
             if (passName == passwordData) {
                 val intent = Intent(this, choose_options::class.java)
                 startActivity(intent)
-                handler.removeCallbacks(runnable)
+                //handler.removeCallbacks(runnable)
                 finish()
             } else {
                 countingsign_in -= 1
                 if (countingsign_in > 0){
-                    showAlert(this, "Vui lòng kiểm tra lại mã quản lý của bạn", "bạn còn $countingsign_in lần đăng nhập") {
+                    showAlert(this, "Vui lòng kiểm tra lại mã quản lý của bạn", "Bạn còn $countingsign_in lần đăng nhập") {
                         editTxt.setText("")
                     }
                 }
@@ -88,14 +86,9 @@ class sign_in : AppCompatActivity() {
                     showAlert(this, "Sai mã đăng nhập", "Hệ thống sẽ tự chuyển ra trang chủ trong 1 phút nữa") {
                         countingsign_in = 3
 
-                        handler.postDelayed({
-                            val i = Intent(this, normal_Slider::class.java)
-                            startActivity(i)
-                            finish()
-                        }, DELAY_TIME_MS)
+                        handler.postDelayed(runnable, DELAY_TIME_MS)
                     }
                 }
-
             }
         }
 
@@ -106,7 +99,7 @@ class sign_in : AppCompatActivity() {
                 if (passName == passwordData) {
                     val intent = Intent(this, choose_options::class.java)
                     startActivity(intent)
-                    handler.removeCallbacks(runnable)
+                    //handler.removeCallbacksAndMessages(null)
                     finish()
                 } else {
                     countingsign_in -= 1
@@ -119,11 +112,7 @@ class sign_in : AppCompatActivity() {
                         showAlert(this, "Sai mã đăng nhập", "Hệ thống sẽ tự chuyển ra trang chủ trong 1 phút nữa") {
                             countingsign_in =3
 
-                            handler.postDelayed({
-                                val i = Intent(this, normal_Slider::class.java)
-                                startActivity(i)
-                                finish()
-                            }, DELAY_TIME_MS)
+                            handler.postDelayed(runnable, DELAY_TIME_MS)
                         }
                     }
                 }
@@ -133,15 +122,23 @@ class sign_in : AppCompatActivity() {
 
         val cancelBtn = findViewById<Button>(R.id.buttonCancel)
         cancelBtn.setOnClickListener {
-            val i = Intent(this, sliderView::class.java)
+            val i = Intent(this, normal_Slider::class.java)
             startActivity(i)
+
+            handler.removeCallbacksAndMessages(null)
         }
         // for button below
         val cancelBtn2 = findViewById<Button>(R.id.button_Cancel)
         cancelBtn2.setOnClickListener {
-            val i = Intent(this, sliderView::class.java)
+            val i = Intent(this, normal_Slider::class.java)
             startActivity(i)
+
+            handler.removeCallbacksAndMessages(null)
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
     }
 }
 

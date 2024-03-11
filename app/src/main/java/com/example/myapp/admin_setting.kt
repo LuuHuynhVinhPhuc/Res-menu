@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Window
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -19,6 +21,11 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.textfield.TextInputLayout
 
 class admin_setting : AppCompatActivity() {
+    override fun onDestroy() {
+        val handler = Handler(Looper.getMainLooper())
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)

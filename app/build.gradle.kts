@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-android")
     id("com.google.gms.google-services")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 allprojects {
@@ -26,6 +27,13 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+        composeOptions {
+            kotlinCompilerExtensionVersion = "1.4.0"
+        }
+
+        kotlinOptions {
+            jvmTarget = "1.8"
         }
     }
 
@@ -54,6 +62,13 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    sourceSets {
+        getByName("main") {
+            assets {
+                srcDirs("src\\main\\assets", "src\\main\\assets")
+            }
         }
     }
     buildFeatures{
@@ -92,4 +107,5 @@ dependencies {
     implementation("me.relex:circleindicator:1.3.2")
     implementation("me.relex:circleindicator:2.1.6")
     implementation("androidx.sqlite:sqlite-framework:2.4.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 }

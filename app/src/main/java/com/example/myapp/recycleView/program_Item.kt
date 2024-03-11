@@ -2,7 +2,7 @@ package com.example.myapp.recycleView
 
 import kotlinx.serialization.Serializable
 @Serializable
-data class images_Item(
-    val image_link: String,
-    val description: String
+data class program_Item(
+    val program: String,
+    val images: List<images_Item>
 )
