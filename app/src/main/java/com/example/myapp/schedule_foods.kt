@@ -86,42 +86,9 @@ class schedule_foods : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.layoutManager = layoutManager
-//        imageList = ArrayList()
-//        recyclerview = findViewById<View>(R.id.rvImage_and_Video) as RecyclerView
-//        recyclerViewimageAdapter = images_Adapter(imageList)
-//
-//        val layoutManager : RecyclerView.LayoutManager = GridLayoutManager(this, 3)
-//        recyclerview!!.layoutManager = layoutManager
-//        val snapHelper = LinearSnapHelper()
-//        snapHelper.attachToRecyclerView(recyclerview)
-//
-//        recyclerview!!.adapter = recyclerViewimageAdapter
-//        prepareImageListofdata()
+
+
     }
-
-//    private fun prepareImageListofdata() {
-//        var image = images_Item(R.drawable.ct1)
-//        imageList.add(image)
-//        image = images_Item(R.drawable.ct1b)
-//        imageList.add(image)
-//        image = images_Item(R.drawable.ct1c)
-//        imageList.add(image)
-//        image = images_Item(R.drawable.ct2)
-//        imageList.add(image)
-//        image = images_Item(R.drawable.ct2b)
-//        imageList.add(image)
-//        image = images_Item(R.drawable.ct2c)
-//        imageList.add(image)
-//        image = images_Item(R.drawable.ct3)
-//        imageList.add(image)
-//        image = images_Item(R.drawable.ct3b)
-//        imageList.add(image)
-//        image = images_Item(R.drawable.ct3c)
-//        imageList.add(image)
-//
-//        recyclerViewimageAdapter!!.notifyDataSetChanged()
-//    }
-
     // show an alert when incorrect password
     fun showAlert(context: Context, title: String, message: String, onOkClicked: () -> Unit) {
         val builder = AlertDialog.Builder(context)

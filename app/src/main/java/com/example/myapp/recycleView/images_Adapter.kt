@@ -28,7 +28,7 @@ class images_Adapter constructor(private val context: Context) :
 
         holder.tvProgram.text = program.program
         // Load and display image (replace with your image loading library)
-        Glide.with(context).load(context.assets.open(program.images[0].image_link)).into(holder.images)
+        Glide.with(context).load(context.assets.open(program.images[1].image_link)).into(holder.images)
     }
     fun setData(programs: List<program_Item>) {
         this.program = programs
