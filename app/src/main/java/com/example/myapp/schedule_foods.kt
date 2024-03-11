@@ -24,6 +24,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.Json.Default.decodeFromString
 import kotlinx.serialization.json.JsonDecoder
+import retrofit2.Retrofit
 import java.util.ArrayList
 
 class schedule_foods : AppCompatActivity() {
@@ -87,8 +88,8 @@ class schedule_foods : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.layoutManager = layoutManager
 
-
     }
+
     // show an alert when incorrect password
     fun showAlert(context: Context, title: String, message: String, onOkClicked: () -> Unit) {
         val builder = AlertDialog.Builder(context)

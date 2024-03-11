@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapp.R
 
-class images_Adapter constructor(private val context: Context) :
-    RecyclerView.Adapter<images_Adapter.MyViewHolder>()
+class images_Adapter constructor(private val context: Context) : RecyclerView.Adapter<images_Adapter.MyViewHolder>()
 {
     private var program: List<program_Item> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -28,7 +27,12 @@ class images_Adapter constructor(private val context: Context) :
 
         holder.tvProgram.text = program.program
         // Load and display image (replace with your image loading library)
-        Glide.with(context).load(context.assets.open(program.images[1].image_link)).into(holder.images)
+        //Glide.with(context).load(context.assets.open(program.images[position].image_link)).into(holder.images)
+        Glide.with(context)
+            .load("file:///android_asset/" + program.images[0].image_link) // Assuming image_link is the URL in program_Item
+            .placeholder(R.drawable.ct1) // Optional placeholder image
+            .error(R.drawable.ct1b) // Optional error image
+            .into(holder.images)
     }
     fun setData(programs: List<program_Item>) {
         this.program = programs
@@ -37,5 +41,8 @@ class images_Adapter constructor(private val context: Context) :
     class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val images : ImageView = itemView.findViewById(R.id.rv_imageView)
         var tvProgram : TextView = itemView.findViewById(R.id.eventName)
+    }
+    override fun onViewRecycled(holder: MyViewHolder) {
+        Glide.with(context).clear(holder.images)
     }
 }
