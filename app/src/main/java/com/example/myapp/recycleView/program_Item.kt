@@ -4,5 +4,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class program_Item(
     val program: String,
-    val images: List<images_Item>
+    val images: List<images_Item>,
+    val startDate : String,
+    val endDate : String
 )

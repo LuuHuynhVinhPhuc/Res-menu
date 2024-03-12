@@ -24,6 +24,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.Json.Default.decodeFromString
 import kotlinx.serialization.json.JsonDecoder
+import kotlinx.serialization.json.JsonElement
 import retrofit2.Retrofit
 import java.util.ArrayList
 
@@ -79,8 +80,10 @@ class schedule_foods : AppCompatActivity() {
         // for recyclerView
 
         // read json files
+        val json = Json{ignoreUnknownKeys = true}
         val jsonString = assets.open("digitalmkt.json").bufferedReader().readText()
-        val programs: List<program_Item> = Json.decodeFromString<List<program_Item>>(jsonString)
+        val jsonElement: JsonElement = Json.parseToJsonElement(jsonString)
+        val programs: List<program_Item> = json.decodeFromString<List<program_Item>>(jsonElement.toString())
 
         recyclerView.adapter = adapter
         adapter.setData(programs)

@@ -9,40 +9,66 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapp.R
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class images_Adapter constructor(private val context: Context) : RecyclerView.Adapter<images_Adapter.MyViewHolder>()
 {
-    private var program: List<program_Item> = listOf()
+    private var programs: List<program_Item> = listOf()
+
+    fun setData(programs: List<program_Item>) {
+        this.programs = programs
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.rv_layout_item, parent, false)
         return MyViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return program.size
+        return programs.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val program = program[position]
+        val program = programs[position]
 
+        // Set program title
         holder.tvProgram.text = program.program
-        // Load and display image (replace with your image loading library)
-        //Glide.with(context).load(context.assets.open(program.images[position].image_link)).into(holder.images)
-        Glide.with(context)
-            .load("file:///android_asset/" + program.images[0].image_link) // Assuming image_link is the URL in program_Item
-            .placeholder(R.drawable.ct1) // Optional placeholder image
-            .error(R.drawable.ct1b) // Optional error image
-            .into(holder.images)
+
+        // Format and set date-time range
+        val startDate = formatDate(program.startDate)
+        val endDate = formatDate(program.endDate)
+        holder.tvDateTime.text = "Từ ngày $startDate đến ngày $endDate"
+
+        // Load and display images
+        for (i in 0 until program.images.size.coerceAtMost(holder.imageViews.size)) {
+            val imageLink = program.images[i].image_link
+            Glide.with(context)
+                .load("file:///android_asset/" + imageLink)
+                .placeholder(R.drawable.ct1)
+                .error(R.drawable.ct1b)
+                .into(holder.imageViews[i])
+        }
     }
-    fun setData(programs: List<program_Item>) {
-        this.program = programs
-        notifyDataSetChanged()
+
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val imageViews: Array<ImageView> = arrayOf(
+            itemView.findViewById(R.id.menu),
+            itemView.findViewById(R.id.menu2),
+            itemView.findViewById(R.id.menu3),
+            itemView.findViewById(R.id.slider1),
+            itemView.findViewById(R.id.slider2),
+            itemView.findViewById(R.id.slider3)
+        )
+        val tvProgram: TextView = itemView.findViewById(R.id.eventName)
+        val tvDateTime: TextView = itemView.findViewById(R.id.dateTime)
     }
-    class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val images : ImageView = itemView.findViewById(R.id.rv_imageView)
-        var tvProgram : TextView = itemView.findViewById(R.id.eventName)
-    }
-    override fun onViewRecycled(holder: MyViewHolder) {
-        Glide.with(context).clear(holder.images)
+
+    private fun formatDate(dateString: String): String {
+        val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) // Adjust format as needed
+        val date = formatter.parse(dateString)
+        val newFormatter = SimpleDateFormat("EEE, MMM d, yyyy", Locale.getDefault()) // Customize output format
+        return newFormatter.format(date)
     }
 }

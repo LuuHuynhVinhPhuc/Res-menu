@@ -1,104 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".schedule_foods"
     android:layout_gravity="center"
-    >
+    android:orientation="horizontal"
+    android:padding="30dp">
 
     <!--list of images and videos-->
     <RelativeLayout
-        android:layout_width="2040dp"
-        android:layout_height="1016dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_marginStart="250dp"
-        android:background="@drawable/round_coner"
-        android:gravity="center">
-
-
+        android:gravity="center"
+        android:id="@+id/btnChosse">
         <!--for content-->
+
+        <!--for date for content-->
 
         <TextView
             android:id="@+id/mainpage"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="-180dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="-40dp"
             android:text="Kho hình ảnh &amp; video"
             android:textColor="@color/black"
-            android:textSize="60sp"
+            android:textSize="80sp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvImage_and_Video"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_width="1711dp"
+            android:layout_height="1200dp"
+            android:layout_alignTop="@id/mainpage"
+            android:layout_marginStart="500dp"
+            android:layout_alignBottom="@id/linearLayout"
+            android:layout_marginTop="160dp"
+            android:layout_marginEnd="500dp"
+            android:layout_marginBottom="161dp"
+            android:background="@drawable/round_coner"
             android:orientation="horizontal"
             android:padding="16dp" />
 
-        <!--for date for content-->
-        <TextView
-            android:id="@+id/eventDate"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_below="@id/rvImage_and_Video"
-            android:gravity="center"
-            android:text="Từ ngày : 27-02-2024"
-            android:textColor="@color/Maroon"
-            android:textSize="60sp" />
+            android:layout_height="100dp"
+            android:layout_marginTop="1000dp"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonDownload"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="180dp"
+                android:background="@drawable/round_coner"
+                android:backgroundTint="@color/Orange"
+                android:padding="20dp"
+                android:text="Download"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="normal" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonSave"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="180dp"
+                android:background="@drawable/round_coner"
+                android:backgroundTint="@color/greenLeaf"
+                android:padding="20dp"
+                android:text="Lưu"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="normal" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonSkip"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_coner"
+                android:backgroundTint="@color/Silver"
+                android:padding="20dp"
+                android:text="Bỏ qua"
+                android:textAllCaps="false"
+                android:textColor="@color/Red"
+                android:textSize="30sp"
+                android:textStyle="normal" />
+        </LinearLayout>
     </RelativeLayout>
 
 
-    <LinearLayout
-        android:layout_width="1000dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="1080dp"
-        android:layout_marginStart="-1500sp"
-        android:gravity="center"
-        >
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonDownload"
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="180dp"
-            android:background="@drawable/round_coner"
-            android:backgroundTint="@color/Orange"
-            android:padding="20dp"
-            android:textAllCaps="false"
-            android:text="Download"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="normal" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonSave"
-            android:layout_width="200dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="180dp"
-            android:background="@drawable/round_coner"
-            android:backgroundTint="@color/greenLeaf"
-            android:padding="20dp"
-            android:textAllCaps="false"
-            android:text="Lưu"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="normal" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonSkip"
-            android:layout_width="200dp"
-            android:textAllCaps="false"
-            android:layout_height="match_parent"
-            android:background="@drawable/round_coner"
-            android:backgroundTint="@color/Silver"
-            android:padding="20dp"
-            android:text="Bỏ qua"
-            android:textColor="@color/Red"
-            android:textSize="30sp"
-            android:textStyle="normal" />
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

@@ -23,10 +23,12 @@
         "description": "slider 2"
       },
       {
-        "image_link": "slider3.jpg",
+        "image_link": "slider2.jpg",
         "description": "slider 3"
       }
-    ]
+    ],
+    "start_date": "12/03/2024",
+    "end_date": "15/03/2024"
   },
   {
     "program": "Chương trình 2",
@@ -55,7 +57,9 @@
         "image_link": "slider3.jpg",
         "description": "slider 3"
       }
-    ]
+    ],
+    "start_date": "16/03/2024",
+    "end_date": "20/03/2024"
   },
   {
     "program": "chương trình 3",
@@ -84,6 +88,8 @@
         "image_link": "slider3.jpg",
         "description": "slider 3"
       }
-    ]
+    ],
+    "start_date": "22/03/2024",
+    "end_date": "28/03/2024"
   }
 ]
