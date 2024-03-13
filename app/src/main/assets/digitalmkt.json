@@ -28,7 +28,8 @@
       }
     ],
     "start_date": "12/03/2024",
-    "end_date": "15/03/2024"
+    "end_date": "15/03/2024",
+    "eventID": "1"
   },
   {
     "program": "Chương trình 2",
@@ -59,10 +60,11 @@
       }
     ],
     "start_date": "16/03/2024",
-    "end_date": "20/03/2024"
+    "end_date": "20/03/2024",
+    "eventID": "2"
   },
   {
-    "program": "chương trình 3",
+    "program": "Chương trình 3",
     "images": [
       {
         "image_link": "main.jpg",
@@ -90,6 +92,7 @@
       }
     ],
     "start_date": "22/03/2024",
-    "end_date": "28/03/2024"
+    "end_date": "28/03/2024",
+    "eventID": "3"
   }
 ]

@@ -3,13 +3,16 @@ package com.example.myapp
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,7 +35,7 @@ class schedule_foods : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: images_Adapter
     private var programs: List<program_Item> = listOf()
-
+    lateinit var shareRef : SharedPreferences
     override fun onDestroy() {
         val handler = Handler(Looper.getMainLooper())
         super.onDestroy()
@@ -54,7 +57,7 @@ class schedule_foods : AppCompatActivity() {
             startActivity(i)
         }
         // save and go to slider
-        val btnSave = findViewById<Button>(R.id.buttonSave)
+        val btnSave = findViewById<Button>(R.id.buttonSaveSchedule)
         btnSave.setOnClickListener(){
             val i = Intent(this, sliderView::class.java)
             startActivity(i)
@@ -82,6 +85,7 @@ class schedule_foods : AppCompatActivity() {
         // read json files
         val json = Json{ignoreUnknownKeys = true}
         val jsonString = assets.open("digitalmkt.json").bufferedReader().readText()
+
         val jsonElement: JsonElement = Json.parseToJsonElement(jsonString)
         val programs: List<program_Item> = json.decodeFromString<List<program_Item>>(jsonElement.toString())
 
@@ -91,6 +95,12 @@ class schedule_foods : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.layoutManager = layoutManager
 
+        // snapHelper for focus elements
+        adapter.attachSnapHelper(recyclerView)
+
+        // add share references for importing program is chose
+        shareRef = getSharedPreferences("ID_storage", Context.MODE_PRIVATE)
+        val editor = shareRef.edit()
     }
 
     // show an alert when incorrect password
@@ -106,5 +116,4 @@ class schedule_foods : AppCompatActivity() {
         val dialog = builder.create()
         dialog.show()
     }
-
 }
