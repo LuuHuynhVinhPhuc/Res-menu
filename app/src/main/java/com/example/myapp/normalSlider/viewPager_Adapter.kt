@@ -1,5 +1,6 @@
 package com.example.myapp.normalSlider
 
+import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +16,11 @@ import java.net.MalformedURLException
 import java.net.URLEncoder
 import java.net.URL
 
-class viewPager_Adapter: ListAdapter<ImageItem,viewPager_Adapter.ViewHolder>(DiffCallback()){
+class viewPager_Adapter(val context: Context): ListAdapter<ImageItem,viewPager_Adapter.ViewHolder>(DiffCallback()){
 
     class DiffCallback : DiffUtil.ItemCallback<ImageItem>(){
         override fun areItemsTheSame(oldItem: ImageItem, newItem: ImageItem): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.eventID == newItem.eventID
         }
 
         override fun areContentsTheSame(oldItem: ImageItem, newItem: ImageItem): Boolean {
@@ -28,18 +29,7 @@ class viewPager_Adapter: ListAdapter<ImageItem,viewPager_Adapter.ViewHolder>(Dif
 
     }
     class ViewHolder(iteView: View): RecyclerView.ViewHolder(iteView){
-        private val imageView = iteView.findViewById<ImageView>(R.id.imgNormalSlider)
-
-        fun bindData(item: ImageItem){
-            try {
-                // Sử dụng chuỗi đã thêm giao thức trong Glide
-                Glide.with(itemView)
-                    .load(item.url)
-                    .into(imageView)
-            } catch (e: MalformedURLException) {
-                e.printStackTrace()
-            }
-        }
+        val imageView = iteView.findViewById<ImageView>(R.id.imgNormalSlider)
 
     }
 
@@ -52,6 +42,27 @@ class viewPager_Adapter: ListAdapter<ImageItem,viewPager_Adapter.ViewHolder>(Dif
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val imageItem = getItem(position)
-        holder.bindData(imageItem)
+        // Array to store up to 3 image URLs
+        val imageUrls = mutableListOf<String>()
+
+        // Load and display images
+        for (i in 0 until imageItem.images.size.coerceAtMost(3)) {
+            val image = imageItem.images[i]
+
+            // Check if image_link contains "menu" (case-insensitive)
+            if (image.image_link?.lowercase()?.contains("menu") == true || image.image_link?.lowercase()?.contains("main") == true ) {
+                val imageUrl = "file:///android_asset/${image.image_link}"
+                Glide.with(context)
+                    .load(imageUrl)
+                    .placeholder(R.drawable.ct1)
+                    .error(R.drawable.ct1b)
+                    .into(holder.imageView)
+                imageUrls.add(imageUrl)
+                // Early exit if 3 images are found for efficiency
+                if (imageUrls.size == 3) {
+                    break
+                }
+            }
+        }
     }
 }

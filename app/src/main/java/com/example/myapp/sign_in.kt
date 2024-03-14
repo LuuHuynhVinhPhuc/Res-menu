@@ -54,18 +54,7 @@ class sign_in : AppCompatActivity() {
         val btnAcept = findViewById<Button>(R.id.buttonAcp)
         val editTxt: EditText = findViewById(R.id.editPassword)
 
-//        // Khi người dùng nhập xong
-//        editTxt.setOnKeyListener { _, keyCode, _ ->
-//            if (keyCode == KeyEvent.KEYCODE_ENTER) {
-//                isUserTyping = false
-//                handler.postDelayed({
-//                    val intent = Intent(this, normal_Slider::class.java)
-//                    startActivity(intent)
-//                    finish()
-//                }, DELAY_TIME_MS)
-//            }
-//            false
-//        }
+
         // set event
         btnAcept.setOnClickListener(){
             // Find EditText (redundant in this case)

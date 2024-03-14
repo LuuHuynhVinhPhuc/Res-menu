@@ -1,7 +1,9 @@
 package com.example.myapp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,22 +14,37 @@ import android.view.View
 import android.view.Window
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.viewpager2.widget.ViewPager2
+import com.example.myapp.autoSlider.AutoProgram_Item
+import com.example.myapp.databinding.ActivityNormalSliderBinding
+import com.example.myapp.databinding.ActivityScheduleFoodsBinding
 import com.example.myapp.jsonData.jsonData
 import com.example.myapp.normalSlider.ImageItem
 import com.example.myapp.normalSlider.viewPager_Adapter
+import com.example.myapp.recycleView.program_Item
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 import java.io.InputStream
 import java.net.URL
 import java.util.UUID
 
 class normal_Slider : AppCompatActivity() {
-    private val DELAY_TIME_MS: Long = 90000 // 60 seconds
+
+    // setting for class
+    private var _binding : ActivityNormalSliderBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var viewpager2 : ViewPager2
     private lateinit var pageChangeListener: ViewPager2.OnPageChangeCallback
+    private var imageList: List<ImageItem> = listOf()
+    private val imageAdapter = viewPager_Adapter(this)
 
+    // shared references
+    private lateinit var sharedPreferences: SharedPreferences
     private val params = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.WRAP_CONTENT,
         LinearLayout.LayoutParams.WRAP_CONTENT
@@ -37,8 +54,9 @@ class normal_Slider : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
+        _binding = ActivityNormalSliderBinding.inflate(layoutInflater)
         supportActionBar?.hide()
-        setContentView(R.layout.activity_normal_slider)
+        setContentView(binding.root)
 
         viewpager2 = findViewById(R.id.view_pager2)
         // go to sign in with button
@@ -47,26 +65,37 @@ class normal_Slider : AppCompatActivity() {
             val i = Intent(this, sign_in::class.java)
             startActivity(i)
         }
-        val imageList = arrayListOf(
-            ImageItem(
-                UUID.randomUUID().toString(),
-                "android.resource://" + packageName + "/" + R.drawable.main
-            ),
-            ImageItem(
-                UUID.randomUUID().toString(),
-                "android.resource://" + packageName + "/" + R.drawable.menu1
-            ),
-            ImageItem(
-                UUID.randomUUID().toString(),
-                "android.resource://" + packageName + "/" + R.drawable.menu2
-            )
-        )
-        val imageAdapter = viewPager_Adapter()
+
+        // shared references value
+        sharedPreferences = getSharedPreferences("Even_ID", Context.MODE_PRIVATE)
+
+        // read data from json
+        readjsondata()
+        // load recycler view
+        RVload()
+
+        // get data from shared references
+        val storageID = sharedPreferences.getString("nodeIDEvent","")
+        Toast.makeText(this, storageID, Toast.LENGTH_SHORT).show()
+        // Indicator Dots
+        indicatorDots()
+
+    }
+    private fun readjsondata() {
+        // read json files
+        val json = Json{ignoreUnknownKeys = true}
+        val jsonString = assets.open("digitalmkt.json").bufferedReader().readText()
+
+        val jsonElement: JsonElement = Json.parseToJsonElement(jsonString)
+        imageList = json.decodeFromString<List<ImageItem>>(jsonElement.toString())
+    }
+
+    fun RVload(){
         viewpager2.adapter = imageAdapter
         imageAdapter.submitList(imageList)
+    }
 
-        // Indicator Dots
-
+    fun indicatorDots(){
         val slideDotLL = findViewById<LinearLayout>(R.id.slideDot)
         val dotsImage = Array(imageList.size) { ImageView(this)}
 
@@ -95,9 +124,5 @@ class normal_Slider : AppCompatActivity() {
             }
         }
         viewpager2.registerOnPageChangeCallback(pageChangeListener)
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        viewpager2.unregisterOnPageChangeCallback(pageChangeListener)
     }
 }

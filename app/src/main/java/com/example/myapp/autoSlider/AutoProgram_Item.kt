@@ -1,12 +1,11 @@
-package com.example.myapp.normalSlider
+package com.example.myapp.autoSlider
 
 import com.example.myapp.recycleView.images_Item
 import kotlinx.serialization.Serializable
-import java.net.URL
 @Serializable
-data class ImageItem(
+data class AutoProgram_Item(
     val program: String,
-    val images: List<imagesNormal_Item>,
+    val images: List<images_Item>,
     val start_date : String,
     val end_date : String,
     val eventID : String

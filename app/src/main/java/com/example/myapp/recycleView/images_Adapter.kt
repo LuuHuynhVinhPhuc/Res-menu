@@ -1,6 +1,8 @@
 package com.example.myapp.recycleView
 
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +10,21 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapp.R
+import com.example.myapp.normalSlider.ImageItem
+import com.example.myapp.normalSlider.viewPager_Adapter
+import com.example.myapp.normal_Slider
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.math.log
 
-class images_Adapter(private val context: Context) : RecyclerView.Adapter<images_Adapter.MyViewHolder>()
+class images_Adapter(val context: Context) : RecyclerView.Adapter<images_Adapter.MyViewHolder>()
 {
     private var programs: List<program_Item> = listOf()
     private val snapHelper = LinearSnapHelper()
@@ -60,6 +68,7 @@ class images_Adapter(private val context: Context) : RecyclerView.Adapter<images
                 .error(R.drawable.ct1b)
                 .into(holder.imageViews[i])
         }
+
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -74,8 +83,8 @@ class images_Adapter(private val context: Context) : RecyclerView.Adapter<images
         val tvProgram: TextView = itemView.findViewById(R.id.eventName)
         val tvDateTime: TextView = itemView.findViewById(R.id.dateTime)
         val idEvent: TextView = itemView.findViewById(R.id.idEvent)
-    }
 
+    }
     private fun formatDate(dateString: String): String {
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) // Adjust format as needed
         val date = formatter.parse(dateString)
