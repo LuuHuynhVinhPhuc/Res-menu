@@ -25,9 +25,7 @@
         android:theme="@style/Theme.MyApp"
         android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
-        <activity
-            android:name=".check_json_data"
-            android:exported="false" />
+
         <activity
             android:name=".normal_Slider"
             android:exported="true"

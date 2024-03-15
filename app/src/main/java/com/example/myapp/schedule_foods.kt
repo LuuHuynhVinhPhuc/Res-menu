@@ -9,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
@@ -16,10 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapp.databinding.ActivityScheduleFoodsBinding
 import com.example.myapp.loading_progress.loadingDialog
+import com.example.myapp.normalSlider.ImageItem
 import com.example.myapp.recycleView.images_Adapter
 import com.example.myapp.recycleView.program_Item
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.Json.Default.encodeToString
 import kotlinx.serialization.json.JsonElement
+import java.io.File
 
 class schedule_foods : AppCompatActivity() {
     // setting for class
@@ -82,9 +86,11 @@ class schedule_foods : AppCompatActivity() {
             val idEvent = findViewById<TextView>(R.id.idEvent)
 
             val sharedPreferences = getSharedPreferences("Even_ID", Context.MODE_PRIVATE)
-            val editor = sharedPreferences?.edit()
-            editor?.putString("nodeIDEvent", idEvent.text.toString())
-            editor?.apply()
+            val editor = sharedPreferences.edit()
+
+            editor.putString("nodeIDEvent", idEvent.text.toString())
+
+            editor.apply()
 
             val i = Intent(this, normal_Slider::class.java)
             startActivity(i)

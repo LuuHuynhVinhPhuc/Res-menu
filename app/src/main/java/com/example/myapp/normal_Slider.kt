@@ -22,12 +22,16 @@ import com.example.myapp.databinding.ActivityNormalSliderBinding
 import com.example.myapp.databinding.ActivityScheduleFoodsBinding
 import com.example.myapp.jsonData.jsonData
 import com.example.myapp.normalSlider.ImageItem
+import com.example.myapp.normalSlider.imagesNormal_Item
 import com.example.myapp.normalSlider.viewPager_Adapter
+import com.example.myapp.recycleView.images_Item
 import com.example.myapp.recycleView.program_Item
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.InputStream
 import java.net.URL
 import java.util.UUID
@@ -40,8 +44,7 @@ class normal_Slider : AppCompatActivity() {
 
     private lateinit var viewpager2 : ViewPager2
     private lateinit var pageChangeListener: ViewPager2.OnPageChangeCallback
-    private var imageList: List<ImageItem> = listOf()
-    private val imageAdapter = viewPager_Adapter(this)
+    private var imageList: List<ImageItem> = mutableListOf()
 
     // shared references
     private lateinit var sharedPreferences: SharedPreferences
@@ -66,31 +69,29 @@ class normal_Slider : AppCompatActivity() {
             startActivity(i)
         }
 
-        // shared references value
-        sharedPreferences = getSharedPreferences("Even_ID", Context.MODE_PRIVATE)
-
-        // read data from json
-        readjsondata()
+        readJSONdata()
         // load recycler view
         RVload()
 
-        // get data from shared references
-        val storageID = sharedPreferences.getString("nodeIDEvent","")
-        Toast.makeText(this, storageID, Toast.LENGTH_SHORT).show()
         // Indicator Dots
         indicatorDots()
-
     }
-    private fun readjsondata() {
-        // read json files
+
+    fun readJSONdata(){
         val json = Json{ignoreUnknownKeys = true}
         val jsonString = assets.open("digitalmkt.json").bufferedReader().readText()
 
         val jsonElement: JsonElement = Json.parseToJsonElement(jsonString)
         imageList = json.decodeFromString<List<ImageItem>>(jsonElement.toString())
-    }
 
+    }
     fun RVload(){
+        // shared references value
+        sharedPreferences = getSharedPreferences("Even_ID", Context.MODE_PRIVATE)
+
+        // get data from shared references
+        val storageID = sharedPreferences.getString("nodeIDEvent","")
+        val imageAdapter = viewPager_Adapter(this, storageID.toString())
         viewpager2.adapter = imageAdapter
         imageAdapter.submitList(imageList)
     }
@@ -125,4 +126,6 @@ class normal_Slider : AppCompatActivity() {
         }
         viewpager2.registerOnPageChangeCallback(pageChangeListener)
     }
+
 }
+

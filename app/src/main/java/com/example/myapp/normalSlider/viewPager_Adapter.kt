@@ -16,7 +16,7 @@ import java.net.MalformedURLException
 import java.net.URLEncoder
 import java.net.URL
 
-class viewPager_Adapter(val context: Context): ListAdapter<ImageItem,viewPager_Adapter.ViewHolder>(DiffCallback()){
+class viewPager_Adapter(val context: Context, val eventIDSF : String): ListAdapter<ImageItem,viewPager_Adapter.ViewHolder>(DiffCallback()){
 
     class DiffCallback : DiffUtil.ItemCallback<ImageItem>(){
         override fun areItemsTheSame(oldItem: ImageItem, newItem: ImageItem): Boolean {
@@ -32,7 +32,6 @@ class viewPager_Adapter(val context: Context): ListAdapter<ImageItem,viewPager_A
         val imageView = iteView.findViewById<ImageView>(R.id.imgNormalSlider)
 
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context)
@@ -45,12 +44,18 @@ class viewPager_Adapter(val context: Context): ListAdapter<ImageItem,viewPager_A
         // Array to store up to 3 image URLs
         val imageUrls = mutableListOf<String>()
 
-        // Load and display images
-        for (i in 0 until imageItem.images.size.coerceAtMost(3)) {
+         //Load and display images
+        for (i in 0 until 2) {
             val image = imageItem.images[i]
 
-            // Check if image_link contains "menu" (case-insensitive)
-            if (image.image_link?.lowercase()?.contains("menu") == true || image.image_link?.lowercase()?.contains("main") == true ) {
+            // Kiểm tra nếu image_link không null và chứa "menu" hoặc "main" (không phân biệt chữ hoa/chữ thường)
+            // và eventID của ImageItem tương ứng với eventIDSF
+            if (!image.image_link.isNullOrBlank() &&
+                ((image.image_link.equals("main.jpg", ignoreCase = true)) ||
+                        (image.image_link.equals("menu1.jpg", ignoreCase = true) ||
+                                image.image_link.equals("menu2.jpg", ignoreCase = true))) &&
+                imageItem.eventID == eventIDSF
+            ) {
                 val imageUrl = "file:///android_asset/${image.image_link}"
                 Glide.with(context)
                     .load(imageUrl)
@@ -64,5 +69,6 @@ class viewPager_Adapter(val context: Context): ListAdapter<ImageItem,viewPager_A
                 }
             }
         }
+
     }
 }
