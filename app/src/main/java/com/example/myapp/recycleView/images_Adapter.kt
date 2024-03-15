@@ -60,15 +60,15 @@ class images_Adapter(val context: Context) : RecyclerView.Adapter<images_Adapter
         holder.idEvent.text = program.eventID
 
         // Load and display images
-        for (i in 0 until program.images.size.coerceAtMost(holder.imageViews.size)) {
+        for (i in 0 until program.images.size) {
             val imageLink = program.images[i].image_link
             Glide.with(context)
                 .load("file:///android_asset/$imageLink")
                 .placeholder(R.drawable.ct1)
                 .error(R.drawable.ct1b)
                 .into(holder.imageViews[i])
-        }
 
+        }
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -83,7 +83,6 @@ class images_Adapter(val context: Context) : RecyclerView.Adapter<images_Adapter
         val tvProgram: TextView = itemView.findViewById(R.id.eventName)
         val tvDateTime: TextView = itemView.findViewById(R.id.dateTime)
         val idEvent: TextView = itemView.findViewById(R.id.idEvent)
-
     }
     private fun formatDate(dateString: String): String {
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) // Adjust format as needed

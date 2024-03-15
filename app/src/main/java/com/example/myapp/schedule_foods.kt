@@ -1,6 +1,5 @@
 package com.example.myapp
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,34 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.preference.Preference
-import android.preference.PreferenceDataStore
-import android.util.JsonReader
-import android.util.Log
-import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
-import androidx.datastore.core.DataStore
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.databinding.ActivityScheduleFoodsBinding
 import com.example.myapp.loading_progress.loadingDialog
 import com.example.myapp.recycleView.images_Adapter
-import com.example.myapp.recycleView.images_Item
 import com.example.myapp.recycleView.program_Item
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.Json.Default.decodeFromString
-import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.JsonElement
-import retrofit2.Retrofit
-import java.util.ArrayList
 
 class schedule_foods : AppCompatActivity() {
     // setting for class
@@ -154,6 +139,5 @@ class schedule_foods : AppCompatActivity() {
         val dialog = builder.create()
         dialog.show()
     }
-
 
 }
