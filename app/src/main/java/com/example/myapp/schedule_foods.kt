@@ -10,11 +10,10 @@ import android.os.Looper
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.myapp.databinding.ActivityScheduleFoodsBinding
 import com.example.myapp.loading_progress.loadingDialog
 import com.example.myapp.recycleView.images_Adapter
@@ -28,7 +27,7 @@ class schedule_foods : AppCompatActivity() {
     private val binding get() = _binding!!
 
     // default variables
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: ViewPager2
     private lateinit var adapter: images_Adapter
     private var programs: List<program_Item> = listOf()
 
@@ -77,27 +76,19 @@ class schedule_foods : AppCompatActivity() {
                 },5000)
             }
         }
-        // save and go to slider
+
         val btnSave = findViewById<Button>(R.id.buttonSaveSchedule)
         btnSave.setOnClickListener(){
+            val idEvent = findViewById<TextView>(R.id.idEvent)
 
-            // get ID item
-            val id : TextView = findViewById(R.id.idEvent)
-            val eventID = id.text.toString()
+            val sharedPreferences = getSharedPreferences("Even_ID", Context.MODE_PRIVATE)
+            val editor = sharedPreferences?.edit()
+            editor?.putString("nodeIDEvent", idEvent.text.toString())
+            editor?.apply()
 
-            // create share references to storage
-            val sharedEdit = sharedPreferences.edit()
-            sharedEdit.putString("nodeIDEvent", eventID)
-            sharedEdit.apply()
-
-            // Toast for saved successful
-            Toast.makeText(this, "Storage successful", Toast.LENGTH_SHORT).show()
-
-            // Intent
             val i = Intent(this, normal_Slider::class.java)
             startActivity(i)
         }
-
         // read JSON file
         JsonReader()
         // set up recycler view
@@ -119,12 +110,8 @@ class schedule_foods : AppCompatActivity() {
         recyclerView.adapter = adapter
         adapter.setData(programs)
 
+        recyclerView.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.layoutManager = layoutManager
-
-        // snapHelper for focus elements
-        adapter.attachSnapHelper(recyclerView)
     }
     // show an alert when incorrect password
     fun showAlert(context: Context, title: String, message: String, onOkClicked: () -> Unit) {

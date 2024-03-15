@@ -1,28 +1,19 @@
 package com.example.myapp.recycleView
 
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.myapp.R
-import com.example.myapp.normalSlider.ImageItem
-import com.example.myapp.normalSlider.viewPager_Adapter
-import com.example.myapp.normal_Slider
 import java.text.SimpleDateFormat
 import java.util.Locale
-import kotlin.math.log
 
 class images_Adapter(val context: Context) : RecyclerView.Adapter<images_Adapter.MyViewHolder>()
 {
@@ -33,9 +24,6 @@ class images_Adapter(val context: Context) : RecyclerView.Adapter<images_Adapter
         notifyDataSetChanged()
     }
 
-    fun attachSnapHelper(recyclerView: RecyclerView) {
-        snapHelper.attachToRecyclerView(recyclerView)
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.rv_layout_item, parent, false)
         return MyViewHolder(view)
@@ -48,6 +36,7 @@ class images_Adapter(val context: Context) : RecyclerView.Adapter<images_Adapter
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val program = programs[position]
 
+        val programId = program.eventID
         // Set program title
         holder.tvProgram.text = program.program
 
@@ -83,6 +72,7 @@ class images_Adapter(val context: Context) : RecyclerView.Adapter<images_Adapter
         val tvProgram: TextView = itemView.findViewById(R.id.eventName)
         val tvDateTime: TextView = itemView.findViewById(R.id.dateTime)
         val idEvent: TextView = itemView.findViewById(R.id.idEvent)
+
     }
     private fun formatDate(dateString: String): String {
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) // Adjust format as needed
