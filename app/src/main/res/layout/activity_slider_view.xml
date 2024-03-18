@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".sliderView"
-    android:background="@color/Silver">
+    android:background="@color/White">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/autoImageSlider"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/autoSliderget"
         android:layout_width="match_parent"
-        android:layout_height="1380sp"
-        android:padding="3dp"/>
+        android:layout_height="1250sp"
+        android:layout_centerInParent="true"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_below="@id/autoSliderget"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
-        android:layout_below="@id/autoImageSlider"
         android:gravity="center"
-        android:id="@+id/AutoSlideDot"/>
+        android:id="@+id/slideDot"/>
 </RelativeLayout>

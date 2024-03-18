@@ -5,36 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
-import androidx.core.widget.AutoScrollHelper
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapp.R
-import com.example.myapp.normalSlider.ImageItem
-import com.example.myapp.recycleView.program_Item
-import java.net.MalformedURLException
+import com.example.myapp.normalSlider.viewPager_Adapter
 
 class AutoSlider_Adapter(private val context: Context) : RecyclerView.Adapter<AutoSlider_Adapter.MyViewHolder>()
 {
-    private var programs: List<AutoProgram_Item> = listOf()
-    private val snapHelper = LinearSnapHelper()
+    private var programs: List<AutoImage_Item> = listOf()
 
-    fun setData(programs: List<AutoProgram_Item>) {
+    fun setData(programs: MutableList<AutoImage_Item>) {
         this.programs = programs
         notifyDataSetChanged()
     }
 
-    fun attachSnapHelper(recyclerView: RecyclerView) {
-        snapHelper.attachToRecyclerView(recyclerView)
-    }
     class MyViewHolder (itemView : View): RecyclerView.ViewHolder(itemView){
         val imageSlider: ImageView = itemView.findViewById(R.id.autoImageSlider)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.auto_slider, parent,false)
-        return MyViewHolder(view)
+        return MyViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.auto_slider, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {
@@ -42,9 +35,14 @@ class AutoSlider_Adapter(private val context: Context) : RecyclerView.Adapter<Au
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val program2 = programs[position]
+        val program = programs[position]
 
-
+        val imageUrl = "file:///android_asset/${program.image_link}"
+        Glide.with(context)
+            .load(imageUrl)
+            .placeholder(R.drawable.ct1)
+            .error(R.drawable.ct1b)
+            .into(holder.imageSlider)
     }
 
 }
