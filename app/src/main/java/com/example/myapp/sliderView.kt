@@ -4,25 +4,25 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.view.MotionEvent
 import android.view.Window
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapp.autoSlider.AutoImage_Item
 import com.example.myapp.autoSlider.AutoProgram_Item
 import com.example.myapp.autoSlider.AutoSlider_Adapter
-import com.example.myapp.databinding.ActivityNormalSliderBinding
 import com.example.myapp.databinding.ActivitySliderViewBinding
-import com.example.myapp.normalSlider.ImageItem
-import com.example.myapp.normalSlider.imagesNormal_Item
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
+import java.util.Timer
+import java.util.TimerTask
+import java.util.logging.Handler
 
 class sliderView : AppCompatActivity() {
-    // setting for class
-    private var _binding : ActivitySliderViewBinding? = null
-    private val binding get() = _binding!!
 
     private lateinit var pageChangeListener: ViewPager2.OnPageChangeCallback
     private var programs: List<AutoProgram_Item> = mutableListOf()
@@ -36,17 +36,24 @@ class sliderView : AppCompatActivity() {
     ).apply {
         setMargins(8,0,8,0)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        _binding = ActivitySliderViewBinding.inflate(layoutInflater)
         supportActionBar?.hide()
-        setContentView(binding.root)
+        setContentView(R.layout.activity_slider_view)
 
         // set recycler view
         RVset()
         // dots
         indicatorDots()
+
+        val overlayButton: AppCompatImageButton = findViewById(R.id.btnChangetoSlider)
+
+        overlayButton.setOnClickListener() {
+            val intent = Intent(this, normal_Slider::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun RVset(){
@@ -77,6 +84,30 @@ class sliderView : AppCompatActivity() {
             }
         }
         imageAdapter.setData(submitList2)
+
+                // auto slider
+        val handler = android.os.Handler(Looper.getMainLooper())
+        val runable = Runnable{
+            // Lấy vị trí trang hiện tại
+            val currentItem = viewPager2.currentItem
+            // Tính vị trí của trang tiếp theo
+            val nextItem = currentItem + 1
+            // Kiểm tra nếu vị trí của trang tiếp theo vượt quá số lượng trang
+            if (nextItem >= imageAdapter.itemCount) {
+                // Nếu vượt quá, chuyển đến trang đầu tiên
+                viewPager2.currentItem = 0
+            } else {
+                // Nếu không, chuyển đến trang tiếp theo
+                viewPager2.currentItem = nextItem
+            }
+        }
+
+        val timer = Timer()
+        timer.schedule(object : TimerTask(){
+            override fun run(){
+                handler.post(runable)
+            }
+        },4000,4000)
     }
 
     // Handle touch events and navigate to the next page

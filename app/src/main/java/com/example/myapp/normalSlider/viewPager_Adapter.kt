@@ -26,11 +26,11 @@ class viewPager_Adapter(val context: Context): RecyclerView.Adapter<viewPager_Ad
     }
 
     class ViewHolder(iteView: View): RecyclerView.ViewHolder(iteView){
-        val imageView = iteView.findViewById<ImageView>(R.id.autoImageSlider)
+        val imageView = iteView.findViewById<ImageView>(R.id.imgNormalSlider)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context)
+            LayoutInflater.from(context)
                 .inflate(R.layout.image_item_layout,parent,false)
         )
     }
@@ -41,7 +41,7 @@ class viewPager_Adapter(val context: Context): RecyclerView.Adapter<viewPager_Ad
         val imageItem = programs[position]
 
         val imageUrl = "file:///android_asset/${imageItem.image_link}"
-        Glide.with(context)
+        Glide.with(holder.itemView.context)
             .load(imageUrl)
             .placeholder(R.drawable.ct1)
             .error(R.drawable.ct1b)

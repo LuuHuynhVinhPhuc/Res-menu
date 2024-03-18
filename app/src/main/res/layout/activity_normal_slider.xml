@@ -25,6 +25,9 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:id="@+id/slideDot"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </RelativeLayout>
 
     <!--copy right and button-->
@@ -52,5 +55,6 @@
             android:contentDescription="gotoSignin"
             android:scaleType="centerInside"
             android:src="@drawable/logomini_lotus" />
+
     </LinearLayout>
 </RelativeLayout>

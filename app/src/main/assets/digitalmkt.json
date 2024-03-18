@@ -56,17 +56,17 @@
         "type" : "0"
       },
       {
-        "image_link": "slider1.jpg",
+        "image_link": "ct1.png",
         "description": "slider 1",
         "type" : "1"
       },
       {
-        "image_link": "slider2.jpg",
+        "image_link": "ct1b.png",
         "description": "slider 2",
         "type" : "1"
       },
       {
-        "image_link": "slider2.jpg",
+        "image_link": "ct1c.png",
         "description": "slider 3",
         "type" : "1"
       }
@@ -94,17 +94,17 @@
         "type" : "0"
       },
       {
-        "image_link": "slider1.jpg",
+        "image_link": "ct2.png",
         "description": "slider 1",
         "type" : "1"
       },
       {
-        "image_link": "slider2.jpg",
+        "image_link": "ct2b.png",
         "description": "slider 2",
         "type" : "1"
       },
       {
-        "image_link": "slider2.jpg",
+        "image_link": "ct3b.png",
         "description": "slider 3",
         "type" : "1"
       }
