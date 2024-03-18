@@ -46,6 +46,7 @@ class normal_Slider : AppCompatActivity() {
     private lateinit var pageChangeListener: ViewPager2.OnPageChangeCallback
     private var imageList: List<ImageItem> = mutableListOf()
 
+    private var submitList: MutableList<imagesNormal_Item> = mutableListOf()
     // shared references
     private lateinit var sharedPreferences: SharedPreferences
     private val params = LinearLayout.LayoutParams(
@@ -69,31 +70,39 @@ class normal_Slider : AppCompatActivity() {
             startActivity(i)
         }
 
-        readJSONdata()
         // load recycler view
         RVload()
 
         // Indicator Dots
         indicatorDots()
     }
-
-    fun readJSONdata(){
+    fun RVload(){
         val json = Json{ignoreUnknownKeys = true}
         val jsonString = assets.open("digitalmkt.json").bufferedReader().readText()
 
         val jsonElement: JsonElement = Json.parseToJsonElement(jsonString)
         imageList = json.decodeFromString<List<ImageItem>>(jsonElement.toString())
 
-    }
-    fun RVload(){
         // shared references value
-        sharedPreferences = getSharedPreferences("Even_ID", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("Even_ID", MODE_PRIVATE)
 
         // get data from shared references
         val storageID = sharedPreferences.getString("nodeIDEvent","")
-        val imageAdapter = viewPager_Adapter(this, storageID.toString())
+
+        val imageAdapter = viewPager_Adapter(this)
         viewpager2.adapter = imageAdapter
-        imageAdapter.submitList(imageList)
+
+        // create new list
+        for (event in imageList){
+            val idEvent = event.eventID
+            for (image in event.images){
+                if (image.type == "0" && idEvent == storageID){
+                    val newItem = imagesNormal_Item(image.image_link, image.description, image.type)
+                    submitList.add(newItem)
+                }
+            }
+        }
+        imageAdapter.setData(submitList)
     }
 
     fun indicatorDots(){

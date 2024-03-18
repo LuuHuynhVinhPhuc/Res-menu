@@ -28,19 +28,20 @@
 
         <activity
             android:name=".normal_Slider"
-            android:exported="true"
+            android:exported="false"
             android:theme="@style/Theme.AppCompat.Light" >
+
+        </activity>
+        <activity
+            android:name=".sliderView"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".sliderView"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light">
-
         </activity>
         <activity
             android:name=".schedule_foods"

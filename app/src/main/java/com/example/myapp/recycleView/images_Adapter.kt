@@ -18,7 +18,6 @@ import java.util.Locale
 class images_Adapter(val context: Context) : RecyclerView.Adapter<images_Adapter.MyViewHolder>()
 {
     private var programs: List<program_Item> = listOf()
-    private val snapHelper = LinearSnapHelper()
     fun setData(programs: List<program_Item>) {
         this.programs = programs
         notifyDataSetChanged()
@@ -36,7 +35,6 @@ class images_Adapter(val context: Context) : RecyclerView.Adapter<images_Adapter
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val program = programs[position]
 
-        val programId = program.eventID
         // Set program title
         holder.tvProgram.text = program.program
 

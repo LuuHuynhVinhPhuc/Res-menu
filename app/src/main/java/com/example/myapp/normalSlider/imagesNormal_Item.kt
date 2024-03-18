@@ -6,4 +6,5 @@ import kotlinx.serialization.Serializable
 data class imagesNormal_Item(
     val image_link: String,
     val description: String,
+    val type: String
 )
