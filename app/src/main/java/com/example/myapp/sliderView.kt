@@ -68,7 +68,7 @@ class sliderView : AppCompatActivity() {
 
         val viewPager2 : ViewPager2 = findViewById(R.id.autoSliderget)
         // get data from shared references
-        val storageID = sharedPreferences.getString("nodeIDEvent","")
+        val storageID = sharedPreferences.getString("nodeIDEvent","1")
 
         val imageAdapter = AutoSlider_Adapter(this)
         viewPager2.adapter = imageAdapter

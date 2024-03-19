@@ -92,7 +92,7 @@ class schedule_foods : AppCompatActivity() {
 
             editor.apply()
 
-            val i = Intent(this, normal_Slider::class.java)
+            val i = Intent(this, sliderView::class.java)
             startActivity(i)
         }
         // read JSON file

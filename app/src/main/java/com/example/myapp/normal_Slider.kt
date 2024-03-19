@@ -65,7 +65,7 @@ class normal_Slider : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("Even_ID", MODE_PRIVATE)
 
         // get data from shared references
-        val storageID = sharedPreferences.getString("nodeIDEvent","")
+        val storageID = sharedPreferences.getString("nodeIDEvent","1")
 
         val imageAdapter = viewPager_Adapter(this)
         viewpager2.adapter = imageAdapter
