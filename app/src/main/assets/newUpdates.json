@@ -1,0 +1,78 @@
+[
+  {
+    "program": "Chương trình 1",
+    "images": [
+      {
+        "image_link": "main.jpg",
+        "description": "menu main",
+        "type" : "0"
+      },
+      {
+        "image_link": "menu1.jpg",
+        "description": "menu 1  ",
+        "type" : "0"
+      },
+      {
+        "image_link": "menu2.jpg",
+        "description": "menu 2  ",
+        "type" : "0"
+      },
+      {
+        "image_link": "slider1.jpg",
+        "description": "slider 1",
+        "type" : "1"
+      },
+      {
+        "image_link": "slider2.jpg",
+        "description": "slider 2",
+        "type" : "1"
+      },
+      {
+        "image_link": "slider2.jpg",
+        "description": "slider 3",
+        "type" : "1"
+      }
+    ],
+    "start_date": "12/03/2024",
+    "end_date": "15/03/2024",
+    "eventID": "1"
+  },
+  {
+    "program": "Chương trình 2",
+    "images": [
+      {
+        "image_link": "main.jpg",
+        "description": "menu main",
+        "type" : "0"
+      },
+      {
+        "image_link": "menu1.jpg",
+        "description": "menu 1  ",
+        "type" : "0"
+      },
+      {
+        "image_link": "menu2.jpg",
+        "description": "menu 2  ",
+        "type" : "0"
+      },
+      {
+        "image_link": "ct1.png",
+        "description": "slider 1",
+        "type" : "1"
+      },
+      {
+        "image_link": "ct1b.png",
+        "description": "slider 2",
+        "type" : "1"
+      },
+      {
+        "image_link": "ct1c.png",
+        "description": "slider 3",
+        "type" : "1"
+      }
+    ],
+    "start_date": "16/03/2024",
+    "end_date": "20/03/2024",
+    "eventID": "2"
+  }
+]

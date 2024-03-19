@@ -27,7 +27,7 @@ import java.io.File
 
 class schedule_foods : AppCompatActivity() {
     // setting for class
-    private var _binding : ActivityScheduleFoodsBinding? = null
+    private var _binding: ActivityScheduleFoodsBinding? = null
     private val binding get() = _binding!!
 
     // default variables
@@ -42,6 +42,7 @@ class schedule_foods : AppCompatActivity() {
         super.onDestroy()
         handler.removeCallbacksAndMessages(null)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -58,31 +59,32 @@ class schedule_foods : AppCompatActivity() {
 
         // edit for cancel : go to choosing page
         val btnCancel = findViewById<Button>(R.id.buttonSkip)
-        btnCancel.setOnClickListener{
+        btnCancel.setOnClickListener {
             val i = Intent(this, sliderView::class.java)
             startActivity(i)
         }
 
-        // for download button
-        val downloadBtn = findViewById<AppCompatButton>(R.id.buttonDownload)
-        downloadBtn.setOnClickListener(){
-            val context = this
-            showAlert(context, "Đồng ý download dữ liệu", "Bạn có muốn download dữ liệu từ API đã cài đặt?"){
-                val loading = loadingDialog(context)
-                loading.startLoading()
-                Handler(Looper.getMainLooper()).postDelayed(object : Runnable{
-                    override fun run() {
-                        loading.isDismiss()
-                        val i = Intent(context, sliderView::class.java)
-                        startActivity(i)
-                        finish()
-                    }
-                },5000)
-            }
-        }
+//        // for download button
+//        val downloadBtn = findViewById<AppCompatButton>(R.id.buttonDownload)
+//        downloadBtn.setOnClickListener(){
+//            val context = this
+//            showAlert(context, "Đồng ý download dữ liệu", "Bạn có muốn download dữ liệu từ API đã cài đặt?"){
+//                val loading = loadingDialog(context)
+//                loading.startLoading()
+//                Handler(Looper.getMainLooper()).postDelayed(object : Runnable{
+//                    override fun run() {
+//                        loading.isDismiss()
+//                        val i = Intent(context, sliderView::class.java)
+//                        startActivity(i)
+//                        finish()
+//                    }
+//                },5000)
+//            }
+//        }
+
 
         val btnSave = findViewById<Button>(R.id.buttonSaveSchedule)
-        btnSave.setOnClickListener(){
+        btnSave.setOnClickListener {
             val idEvent = findViewById<TextView>(R.id.idEvent)
 
             val sharedPreferences = getSharedPreferences("Even_ID", Context.MODE_PRIVATE)
@@ -92,7 +94,7 @@ class schedule_foods : AppCompatActivity() {
 
             editor.apply()
 
-            val i = Intent(this, normal_Slider::class.java)
+            val i = Intent(this, sliderView::class.java)
             startActivity(i)
         }
         // read JSON file
@@ -102,9 +104,9 @@ class schedule_foods : AppCompatActivity() {
     }
 
     // read JSON files
-    fun JsonReader(){
+    fun JsonReader() {
         // read json files
-        val json = Json{ignoreUnknownKeys = true}
+        val json = Json { ignoreUnknownKeys = true }
         val jsonString = assets.open("digitalmkt.json").bufferedReader().readText()
 
         val jsonElement: JsonElement = Json.parseToJsonElement(jsonString)
@@ -112,13 +114,14 @@ class schedule_foods : AppCompatActivity() {
     }
 
     // recycler view set up
-    fun RVset(){
+    fun RVset() {
         recyclerView.adapter = adapter
         adapter.setData(programs)
 
         recyclerView.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
     }
+
     // show an alert when incorrect password
     fun showAlert(context: Context, title: String, message: String, onOkClicked: () -> Unit) {
         val builder = AlertDialog.Builder(context)

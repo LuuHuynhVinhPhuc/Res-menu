@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -142,5 +143,19 @@ class sign_in : AppCompatActivity() {
             dialog.dismiss()
         }
         val dialog = builder.create()
+        dialog.setOnShowListener {
+            val titleView = dialog.findViewById<TextView>(context.resources.getIdentifier("alertTitle", "id", "android"))
+            val messageView = dialog.findViewById<TextView>(android.R.id.message)
+            val okButton = dialog.findViewById<TextView>(android.R.id.button1)
+
+            titleView?.textSize = 43f
+            titleView?.typeface = Typeface.DEFAULT_BOLD
+
+            messageView?.textSize = 24f
+            messageView?.typeface = Typeface.DEFAULT
+
+            okButton?.textSize = 25f
+            okButton?.typeface = Typeface.DEFAULT_BOLD
+        }
         dialog.show()
     }
