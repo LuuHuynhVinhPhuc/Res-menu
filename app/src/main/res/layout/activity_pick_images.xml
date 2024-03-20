@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pick_Images"
+    android:layout_marginTop="40dp">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/spinnerGroup"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="345dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Spinner
+                android:id="@+id/typePage"
+                android:layout_width="800dp"
+                android:layout_height="150dp"
+                android:layout_marginEnd="30dp"
+                android:gravity="center"
+                android:background="@drawable/round_coner"
+                android:dropDownHeight="wrap_content" />
+
+            <Spinner
+                android:id="@+id/eventItem"
+                android:layout_width="800dp"
+                android:layout_height="150dp"
+                android:background="@drawable/round_coner"
+                android:dropDownHeight="wrap_content"
+                android:gravity="center" />
+        </LinearLayout>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_below="@id/spinnerGroup"
+        android:id="@+id/imagesGroup"
+        android:layout_width="match_parent"
+        android:layout_height="800dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="30dp"
+        app:layout_constraintTop_toBottomOf="@id/spinnerGroup"
+        tools:layout_editor_absoluteX="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image1"
+            android:layout_width="700dp"
+            android:layout_height="500dp"
+            android:layout_marginEnd="60dp"
+            android:background="@drawable/round_coner"
+            android:scaleType="centerCrop" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image2"
+            android:layout_width="700dp"
+            android:layout_height="500dp"
+            android:background="@drawable/round_coner"
+            android:scaleType="centerCrop" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image3"
+            android:layout_width="700dp"
+            android:layout_height="500dp"
+            android:layout_marginStart="60sp"
+            android:background="@drawable/round_coner"
+            android:scaleType="centerCrop" />
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/imagesGroup"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/chooseImages"
+            android:layout_width="400dp"
+            android:layout_height="100dp"
+            android:background="@drawable/round_coner"
+            android:backgroundTint="@color/Orange"
+            android:text="Chọn hình"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="normal"
+            android:textAllCaps="false"
+            android:layout_marginEnd="30dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveEvent"
+            android:layout_width="400dp"
+            android:layout_height="100dp"
+            android:background="@drawable/round_coner"
+            android:backgroundTint="@color/Green"
+            android:text="Lưu"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="normal"
+            android:textAllCaps="false"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancelBtnPicking"
+            android:layout_width="400dp"
+            android:layout_height="100dp"
+            android:background="@drawable/round_coner"
+            android:backgroundTint="@color/Silver"
+            android:text="Hủy bỏ"
+            android:textColor="@color/Maroon"
+            android:textSize="40sp"
+            android:textStyle="normal"
+            android:textAllCaps="false"
+            android:layout_marginStart="30dp"/>
+    </LinearLayout>
+</RelativeLayout>

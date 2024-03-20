@@ -1,5 +1,6 @@
 package com.example.myapp
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,6 +15,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapp.databinding.ActivityScheduleFoodsBinding
 import com.example.myapp.loading_progress.loadingDialog
@@ -32,6 +34,7 @@ class schedule_foods : AppCompatActivity() {
 
     // default variables
     private lateinit var recyclerView: ViewPager2
+    private lateinit var recyclerUPload : RecyclerView
     private lateinit var adapter: images_Adapter
     private var programs: List<program_Item> = listOf()
 
@@ -64,6 +67,12 @@ class schedule_foods : AppCompatActivity() {
             startActivity(i)
         }
 
+        // for upload button
+        val btnUpload : AppCompatButton = findViewById(R.id.uploadPicture)
+        btnUpload.setOnClickListener{
+            val i = Intent(this, pick_Images::class.java)
+            startActivity(i)
+        }
 //        // for download button
 //        val downloadBtn = findViewById<AppCompatButton>(R.id.buttonDownload)
 //        downloadBtn.setOnClickListener(){
@@ -82,7 +91,6 @@ class schedule_foods : AppCompatActivity() {
 //            }
 //        }
 
-
         val btnSave = findViewById<Button>(R.id.buttonSaveSchedule)
         btnSave.setOnClickListener {
             val idEvent = findViewById<TextView>(R.id.idEvent)
@@ -96,6 +104,7 @@ class schedule_foods : AppCompatActivity() {
 
             val i = Intent(this, sliderView::class.java)
             startActivity(i)
+
         }
         // read JSON file
         JsonReader()

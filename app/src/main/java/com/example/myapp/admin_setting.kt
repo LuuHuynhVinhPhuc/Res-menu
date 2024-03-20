@@ -44,7 +44,8 @@ class admin_setting : AppCompatActivity() {
             startActivity(i)
         }
 
-        val items = listOf<String>("Chi nhánh 1", "Chi nhánh 2", "Chi nhánh 3", "Chi nhánh 4")
+        // for Spinner ( auto complete text view )
+        val items = listOf("Chi nhánh 1", "Chi nhánh 2", "Chi nhánh 3", "Chi nhánh 4")
         val autoComplete : AutoCompleteTextView = findViewById(R.id.auto)
 
         val adapter = ArrayAdapter(this,R.layout.list_item, items)

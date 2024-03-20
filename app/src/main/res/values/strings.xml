@@ -2,11 +2,14 @@
     <string name="app_name">myApp</string>
     <string name="select">Chọn chi nhánh của bạn</string>
 
-    <string-array name="node">
-        <item>Chi Nhánh 1</item>
-        <item>Chi Nhánh 2</item>
-        <item>Chi Nhánh 3</item>
-        <item>Chi Nhánh 4</item>
-        <item>Chi Nhánh 5</item>
+    <string-array name="type">
+        <item>Slide show</item>
+        <item>Menu</item>
+    </string-array>
+
+    <string-array name="event">
+        <item>Chương trình 1</item>
+        <item>Chương trình 2</item>
+        <item>Chương trình 3</item>
     </string-array>
 </resources>

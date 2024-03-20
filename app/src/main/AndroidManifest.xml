@@ -23,12 +23,15 @@
         android:theme="@style/Theme.MyApp"
         tools:targetApi="31">
         <activity
+            android:name=".pick_Images"
+            android:exported="false" />
+        <activity
             android:name=".schedule_food_event.schedule_food_event"
             android:exported="false" />
         <activity
             android:name=".normal_Slider"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light"></activity>
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".sliderView"
             android:exported="true"
