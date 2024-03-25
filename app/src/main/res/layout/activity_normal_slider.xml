@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".normal_Slider"
-    android:background="@color/Silver">
+    android:background="@color/White">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,8 +14,8 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager2"
             android:layout_width="match_parent"
-            android:layout_height="1190dp"
-            android:layout_centerInParent="true" />
+            android:layout_height="1230dp"
+            android:layout_alignParentTop="true"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -25,9 +24,6 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:id="@+id/slideDot"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
     </RelativeLayout>
 
     <!--copy right and button-->
@@ -43,7 +39,7 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Design by Golden Lotus"
+            android:text="Thiết kế bởi Golden Lotus"
             android:textColor="@color/black"
             android:layout_marginEnd="30dp"
             android:textSize="40sp" />

@@ -25,7 +25,7 @@ class normal_Slider : AppCompatActivity() {
     private var submitList: MutableList<imagesNormal_Item> = mutableListOf()
 
     private val handler = Handler(Looper.getMainLooper())
-    private val delayMillis: Long = 10000
+    private val delayMillis: Long = 60000
     // shared references
     private lateinit var sharedPreferences: SharedPreferences
     private val params = LinearLayout.LayoutParams(

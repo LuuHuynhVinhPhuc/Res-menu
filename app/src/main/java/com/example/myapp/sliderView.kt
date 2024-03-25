@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.view.MotionEvent
+import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
@@ -15,7 +16,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.myapp.autoSlider.AutoImage_Item
 import com.example.myapp.autoSlider.AutoProgram_Item
 import com.example.myapp.autoSlider.AutoSlider_Adapter
-import com.example.myapp.databinding.ActivitySliderViewBinding
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import java.util.Timer
@@ -30,6 +30,8 @@ class sliderView : AppCompatActivity() {
     private var submitList2: MutableList<AutoImage_Item> = mutableListOf()
     // shared references
     private lateinit var sharedPreferences: SharedPreferences
+
+    private var viewPagerClicked = false
     private val params = LinearLayout.LayoutParams(
         LinearLayout.LayoutParams.WRAP_CONTENT,
         LinearLayout.LayoutParams.WRAP_CONTENT
@@ -48,12 +50,8 @@ class sliderView : AppCompatActivity() {
         // dots
         indicatorDots()
 
-        val overlayButton: AppCompatImageButton = findViewById(R.id.btnChangetoSlider)
-
-        overlayButton.setOnClickListener() {
-            val intent = Intent(this, normal_Slider::class.java)
-            startActivity(intent)
-        }
+        val viewPager = findViewById<ViewPager2>(R.id.autoSliderget)
+        viewPager.isUserInputEnabled = false
     }
 
     private fun RVset(){

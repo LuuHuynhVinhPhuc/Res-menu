@@ -11,6 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/ct3b"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         android:id="@+id/autoImageSlider"/>
 </androidx.cardview.widget.CardView>
