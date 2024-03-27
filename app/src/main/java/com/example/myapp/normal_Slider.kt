@@ -1,14 +1,22 @@
 package com.example.myapp
 
+import android.app.Dialog
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.ViewGroup
 import android.view.Window
+import android.view.inputmethod.EditorInfo
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapp.normalSlider.ImageItem
@@ -26,6 +34,8 @@ class normal_Slider : AppCompatActivity() {
 
     private val handler = Handler(Looper.getMainLooper())
     private val delayMillis: Long = 60000
+
+
     // shared references
     private lateinit var sharedPreferences: SharedPreferences
     private val params = LinearLayout.LayoutParams(
@@ -53,8 +63,8 @@ class normal_Slider : AppCompatActivity() {
             false
         }
 
+
         findViewById<AppCompatImageButton>(R.id.btnChangetoSignin).setOnClickListener {
-            handler.removeCallbacksAndMessages(null)
             val i = Intent(this, sign_in::class.java)
             startActivity(i)
         }
@@ -65,6 +75,11 @@ class normal_Slider : AppCompatActivity() {
         // Indicator Dots
         indicatorDots()
     }
+
+    private fun dialogView() {
+
+    }
+
 
     private fun startTimer() {
         handler.postDelayed({

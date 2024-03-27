@@ -23,10 +23,10 @@
         android:theme="@style/Theme.MyApp"
         tools:targetApi="31">
         <activity
-            android:name=".pick_Images"
+            android:name=".signin_Dialog.sign_in_Dialog"
             android:exported="false" />
         <activity
-            android:name=".schedule_food_event.schedule_food_event"
+            android:name=".pick_Images"
             android:exported="false" />
         <activity
             android:name=".normal_Slider"
@@ -53,7 +53,10 @@
             android:exported="false" />
         <activity
             android:name=".sign_in"
-            android:exported="true" />
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:configChanges="orientation"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
     </application>
 
 </manifest>

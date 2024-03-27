@@ -34,6 +34,7 @@ class sign_in : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar?.hide()
+        this.setFinishOnTouchOutside(true)
         setContentView(R.layout.activity_sign_in)
 
 
@@ -110,13 +111,6 @@ class sign_in : AppCompatActivity() {
             false
         }
 
-        val cancelBtn = findViewById<Button>(R.id.buttonCancel)
-        cancelBtn.setOnClickListener {
-            val i = Intent(this, normal_Slider::class.java)
-            startActivity(i)
-
-            handler.removeCallbacksAndMessages(null)
-        }
         // for button below
         val cancelBtn2 = findViewById<Button>(R.id.button_Cancel)
         cancelBtn2.setOnClickListener {
@@ -124,6 +118,11 @@ class sign_in : AppCompatActivity() {
             startActivity(i)
 
             handler.removeCallbacksAndMessages(null)
+        }
+        val btnX : Button = findViewById(R.id.buttonCancel)
+        btnX.setOnClickListener{
+            val i = Intent(this, normal_Slider::class.java)
+            startActivity(i)
         }
     }
     override fun onDestroy() {
